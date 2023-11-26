@@ -17,7 +17,9 @@ class _HomePageState extends State<HomePage> {
   //this method will update our selected index
   //when user tap on the bottom bar
   void navigateBottomBar(int index) {
-    _selectedIndex = index;
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   final List<Widget> _pages = [
@@ -34,11 +36,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: Builder(builder: (context) {
-          return IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
+          return Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
           );
         }),
         elevation: 0,
@@ -46,59 +51,59 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         backgroundColor: Colors.grey[900],
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Column(children: [
-            DrawerHeader(
-            child: Image.asset('lib/images/logo.png', color: Colors.white),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Divider(
-              color: Colors.grey[800],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.white,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  DrawerHeader(
+                    child: Image.asset(
+                      'lib/images/logo.png',
+                      color: Colors.white,
+                      width: 150,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25.0,top: 30),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.home,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        'Home',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25.0),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.info,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        'About',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              title: Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
+              const Padding(
+                padding: EdgeInsets.only(left: 25.0, bottom: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 25.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.info,
-                color: Colors.white,
-              ),
-              title: Text(
-                'About',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          ],),
-          const Padding(
-            padding: EdgeInsets.only(left: 25.0,bottom: 25.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
-              title: Text(
-                'Logout',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ]),
+            ]),
       ),
       body: _pages[_selectedIndex],
     );
