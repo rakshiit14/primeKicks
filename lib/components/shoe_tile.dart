@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:prime_kicks/models/shoe.dart';
 
 class ShoeTile extends StatelessWidget {
-  Shoe shoe;
-  ShoeTile({super.key, required this.shoe});
+  final Shoe shoe;
+  const ShoeTile({super.key, required this.shoe});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,19 @@ class ShoeTile extends StatelessWidget {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.asset(shoe.imagePath),
-        ),
-        Text(
-          shoe.description,
-          style: TextStyle(color: Colors.grey[600]),
+          child: Image.asset(
+            shoe.imagePath,
+          ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left:25),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Text(
+            shoe.description,
+            style: TextStyle(color: Colors.grey[600]),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 25),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +40,8 @@ class ShoeTile extends StatelessWidget {
                 children: [
                   Text(
                     shoe.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   const SizedBox(height: 5),
                   Text(
@@ -44,7 +50,9 @@ class ShoeTile extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              GestureDetector(
+                onTap: () {},
+                child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.black,
@@ -56,7 +64,9 @@ class ShoeTile extends StatelessWidget {
                   child: const Icon(
                     Icons.add,
                     color: Colors.white,
-                  )),
+                  ),
+                ),
+              ),
             ],
           ),
         )
